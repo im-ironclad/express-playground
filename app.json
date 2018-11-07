@@ -1,0 +1,7 @@
+{
+  "name": "express-playground",
+  "description": "This is my express playground where i'm learning and playing around with different node frameworks, query languages and architectures",
+  "repository": "https://github.com/im-ironclad/express-playground.git",
+  "keywords": ["node", "express", "heroku"],
+  "image": "heroku/nodejs"
+}
