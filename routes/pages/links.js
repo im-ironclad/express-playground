@@ -5,10 +5,11 @@ const Link = require('../../models/Link');
 
 // Base links route
 router.get('/', (req, res) => {
-  Link.find({}, function async (err, linkList) {
+  Link.find({}, function (err, linkList) {
     if (err) return res.send(err);
-    let data = {};
-    data.linkList = linkList;
+    let data = {
+      linkList: linkList
+    };
     return res.status(200).render('pages/links.twig', data);
   });
 });
