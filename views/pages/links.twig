@@ -1,0 +1,19 @@
+{% extends '_layout.twig' %}
+
+{% block content %}
+  <h1>
+    Links
+  </h1>
+  
+  {% if linkList %}
+    <ul>
+      {% for link in linkList %}
+        <li>
+          <a href="{{ link.url }}">
+            {{ link.copy }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}
