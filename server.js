@@ -6,6 +6,7 @@ const Twig = require('twig');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 
 // Require Routes
 const home = require('./routes/pages/home');
@@ -30,6 +31,8 @@ app.set('twig-options', {
   allow_async: true,
   strict_variables: false
 });
+
+app.use(express.static(path.join(__dirname, 'assets/build')));
 
 // Use our routes
 app.use('/', home);
