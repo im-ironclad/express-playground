@@ -34,11 +34,8 @@ app.set('twig-options', {
 
 app.use(express.static(path.join(__dirname, 'assets/build')));
 
-// Use our routes
+// Use our Routes and set base URI
 app.use('/', home);
 app.use('/links', links);
-
-// Create/Call our routes and pass along our models
-// routes(app, models);
 
 app.listen(port);
