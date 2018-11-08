@@ -4,4 +4,16 @@
   <p>
     Hello, {{ name }}. Your email address is: {{ email }}
   </p>
-{% endblock %}
+
+  {% if linkList %}
+    <ul>
+      {% for link in linkList %}
+        <li>
+          <a href="{{ link.url }}">
+            {{ link.copy }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}  
