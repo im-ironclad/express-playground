@@ -4,12 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "dev": "concurrently \"webpack --watch --mode development\" \"nodemon server.js\"",
+    "dev": "concurrently \"webpack --watch --mode development\" \"npm start\"",
     "start": "nodemon server.js",
     "build": "webpack --mode production"
   },
   "keywords": [],
-  "author": "",
+  "author": "Adam Ironclad Wells",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
