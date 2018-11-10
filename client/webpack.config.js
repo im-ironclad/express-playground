@@ -1,15 +1,15 @@
-const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require("path");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, 'assets/src/scripts/index.js')
+    app: path.resolve(__dirname, "src/App.js")
   },
   output: {
-    filename: 'index.js',
-    path: path.resolve(__dirname, 'assets/build')
+    filename: "app.js",
+    path: path.resolve(__dirname, "public")
   },
   module: {
     rules: [
@@ -32,7 +32,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "index.css"
+      filename: "app.css"
     })
   ],
   optimization: {
@@ -44,5 +44,14 @@ module.exports = {
       }),
       new OptimizeCSSAssetsPlugin({})
     ]
+  },
+  devServer: {
+    contentBase: path.join(__dirname, "public"),
+    historyApiFallback: true,
+    compress: true,
+    port: 3000,
+    proxy: {
+      "api": "http://localhost:5000"
+    }
   }
 }

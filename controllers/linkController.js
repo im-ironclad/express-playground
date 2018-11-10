@@ -13,7 +13,7 @@ module.exports = {
         let data = {
           linkList: links
         }
-        return res.status(200).render('pages/links.twig', data);
+        // return res.status(200).render('pages/links.twig', data);
       })
       .catch(err => console.log(err));
   }

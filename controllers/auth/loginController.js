@@ -6,7 +6,7 @@ module.exports = {
     res.status(200).render('pages/auth/login.twig');
   },
 
-  async login(req, res) {
+  login(req, res) {
     let errors = {};
     let email = req.body.email_address;
 
@@ -14,7 +14,7 @@ module.exports = {
       .then(user => {
         // Return with errors if user not found
         if (!user) {
-          errors.email_address = "User not found."
+          errors.email_address = "User not found.";
           return res.status(404).json(errors);
         }
 
@@ -24,20 +24,18 @@ module.exports = {
           name: user.name,
         }
 
-        let signedToken;
         // Sign Auth Token
         jwt.sign(
           payload,
           'secret',
           { expiresIn: 3600 },
           (err, token) => {
-            return res.cookie('jwtToken', `Bearer${token}`, {
-                maxAge: 900000,
-                httpOnly: true 
-              }).render('pages/home.twig');
+            if (err) res.status(422).send(err);
+            res.json({token: `Bearer${token}`});
           }
         );
-        
+
+        // res.render('pages/home.twig');
       })
       .catch(err => console.log(err));
   }
