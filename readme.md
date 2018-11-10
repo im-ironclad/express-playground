@@ -10,4 +10,4 @@ This is my express playground where i'm learning and playing around with differe
 * Express JS
 * MongoDB / Mongoose
 
-#### Hosted on Heroku free tier -- if you're visiting the for the first time give it some time to spin up.
+#### Hosted on Heroku free tier -- if you're visiting the app for the first time give it some time to spin up.
