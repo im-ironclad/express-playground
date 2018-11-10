@@ -6,7 +6,6 @@ This is my express playground where i'm learning and playing around with differe
 
 ### Current stack
 * SCSS
-* Vanilla JS
+* React JS
 * Express JS
-* Twig templating
 * MongoDB / Mongoose
