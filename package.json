@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "concurrently \"npm start --prefix server\" \"npm run dev --prefix client\"",
     "start": "nodemon server/server.js",
-    "heroku-postbuild": "npm i --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm i --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
