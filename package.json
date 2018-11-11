@@ -1,0 +1,26 @@
+{
+  "name": "express-playground",
+  "version": "1.0.0",
+  "description": "This is my express playground where i'm learning and playing around with different node frameworks, query languages and architectures",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm start --prefix server\" \"npm run dev --prefix client\"",
+    "start": "nodemon server/server.js",
+    "heroku-postbuild": "npm i --prefix client && npm i --dev --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/im-ironclad/express-playground.git"
+  },
+  "keywords": [],
+  "author": "Adam Ironclad Wells",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/im-ironclad/express-playground/issues"
+  },
+  "homepage": "https://github.com/im-ironclad/express-playground#readme",
+  "devDependencies": {
+    "concurrently": "^4.0.1",
+    "nodemon": "^1.18.6"
+  }
+}
