@@ -1,7 +1,6 @@
 // Require Controllers 
 const homeController = require('../controllers/homeController');
 const loginController = require('../controllers/auth/loginController');
-const linkController = require('../controllers/linkController');
 
 // const isLoggedIn = require('../middleware/isLoggedIn');
 
@@ -13,7 +12,4 @@ module.exports = (app, passport) => {
   // Login
   app.get('/login', loginController.view);
   app.post('/login', loginController.login);
-
-  // Links Route(s)
-  app.get('/links', linkController.get);
 }

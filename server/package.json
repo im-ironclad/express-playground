@@ -4,9 +4,9 @@
   "description": "Server of the application",
   "main": "server.js",
   "scripts": {
-    "dev": "concurrently \"npm start\" \"npm run dev --prefix client\"",
+    "dev": "concurrently \"npm start\" \"npm run dev --prefix ../client\"",
     "start": "nodemon server.js",
-    "heroku-postbuild": "npm i --prefix client && npm i --dev --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "npm i --prefix ../client && npm i --dev --prefix ../client && npm run build --prefix ../client"
   },
   "keywords": [],
   "author": "Adam Ironclad Wells",
