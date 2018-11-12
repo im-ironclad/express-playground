@@ -3,6 +3,7 @@ require('dotenv').config();
 
 // Require packages
 const express = require('express');
+const router = express.Router();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -24,11 +25,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
-// Call our routes and pass along the app and passport
-require('./routes')(app, passport);
+// Call our routes and pass along the router and passport
+require('./routes')(router, passport);
 
 // If we are in production serve static build and assets
 if (process.env.NODE_ENV === 'production') {
+  // Set prefix of /api for production
+  app.use('/api', router);
   // Set static folder
   app.use(express.static(path.resolve(__dirname, '../client', 'public')));
 

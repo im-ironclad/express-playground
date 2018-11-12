@@ -9,7 +9,10 @@ module.exports = {
   signJWT(req, res) {
     var username = req.body.username;
     var password = req.body.password;
-    res.send("post received: %s %s", username, password);
+    res.json({
+      username,
+      password
+    });
   }
 }
 
