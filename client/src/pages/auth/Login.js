@@ -52,9 +52,9 @@ export default class Login extends Component {
     // If errors, load errors
     // If no errors then post to api
     /**
-     * For testing lets hit some api endpoints and see what we get back
+     * For testing lets hit some api endpoints and see what/if we get back
      */
-    fetch('/api/', {
+    fetch('/api/login', {
       method: 'POST'
     }).then(res => console.log(res.text()))
       .catch(err => console.log(err));
