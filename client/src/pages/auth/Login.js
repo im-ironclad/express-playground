@@ -53,7 +53,7 @@ export default class Login extends Component {
      * For testing lets hit some api endpoints and see what/if we get back
      */
     let data = {
-      email_adress: this.state.formValues.email_address,
+      email_address: this.state.formValues.email_address,
       password: this.state.formValues.password
     }
     // fetch('/api/login', {
@@ -62,7 +62,7 @@ export default class Login extends Component {
     //   .then(result => console.log(result))
     //   .catch(err => console.log(err));
     axios.post('/api/login', data)
-      .then(response => console.log(response))
+      .then(response => console.log(response.data))
       .catch(err => console.log(err));
   }
 

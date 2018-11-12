@@ -7,10 +7,10 @@ module.exports = {
   },
 
   signJWT(req, res) {
-    var username = req.body.username;
+    var email_address = req.body.email_address;
     var password = req.body.password;
     res.json({
-      username: username,
+      email_address: email_address,
       password: password
     });
   }

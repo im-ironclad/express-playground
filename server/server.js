@@ -27,6 +27,8 @@ require('./config/passport')(passport);
 
 // Call our routes and pass along the router and passport
 require('./routes')(router, passport);
+// Set prefix of / for development
+app.use('/', router);
 
 // If we are in production serve static build and assets
 if (process.env.NODE_ENV === 'production') {
