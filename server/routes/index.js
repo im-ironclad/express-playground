@@ -9,6 +9,4 @@ module.exports = (app, passport) => {
    */
   // Login
   app.post('/login', loginController.signJWT);
-
-  app.get('/', (req, res) => res.send('hit this route'));
 }
