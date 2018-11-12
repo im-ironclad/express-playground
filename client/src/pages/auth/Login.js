@@ -36,9 +36,6 @@ export default class Login extends Component {
     const groupName = e.target.name;
     const inputValue = e.target.value;
 
-    console.log('GroupName: ', groupName);
-    console.log('InputValue: ', inputValue);
-
     this.setState(prevState => ({
       formValues: {
         ...prevState.formValues,
