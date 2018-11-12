@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 
 // Import components
 import LoginForm from '../../components/forms/LoginForm';
@@ -54,10 +55,17 @@ export default class Login extends Component {
     /**
      * For testing lets hit some api endpoints and see what/if we get back
      */
-    fetch('/api/login', {
-      method: 'POST'
-    }).then(res => res.json())
-      .then(result => console.log(result))
+    let data = {
+      email_adress: this.state.formValues.email_address,
+      password: this.state.formValues.password
+    }
+    // fetch('/api/login', {
+    //   method: 'POST'
+    // }).then(res => res.json())
+    //   .then(result => console.log(result))
+    //   .catch(err => console.log(err));
+    axios.post('/api/login', data)
+      .then(response => console.log(response))
       .catch(err => console.log(err));
   }
 
