@@ -4,7 +4,6 @@
 
 root = true
 
-[*]
-# change these settings to your own preference
+[*] # * Applies to all file types
 indent_style = space
 indent_size = 2
