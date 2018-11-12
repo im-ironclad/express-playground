@@ -56,7 +56,7 @@ export default class Login extends Component {
      */
     fetch('/api/login', {
       method: 'POST'
-    }).then(res => console.log(res.text()))
+    }).then(res => console.log(res.json()))
       .catch(err => console.log(err));
   }
 
