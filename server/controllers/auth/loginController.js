@@ -7,7 +7,9 @@ module.exports = {
   },
 
   signJWT(req, res) {
-    res.send('hit the sendJWT route');
+    var username = req.body.username;
+    var password = req.body.password;
+    res.send("post received: %s %s", username, password);
   }
 }
 

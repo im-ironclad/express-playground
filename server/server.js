@@ -32,10 +32,10 @@ if (process.env.NODE_ENV === 'production') {
   // Set static folder
   app.use(express.static(path.resolve(__dirname, '../client', 'public')));
 
-  // Not sure this is a good route to have..? Maybe turn into a 404 catchall
-  // app.get('*', (req, res) => {
-  //   res.sendFile(path.resolve(__dirname, '../client', 'public', 'index.html'));
-  // });
+  // Catchall similar to using historyApiFallback in dev
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client', 'public', 'index.html'));
+  });
 }
 
 app.listen(port, function () {
