@@ -10,8 +10,8 @@ module.exports = {
     var username = req.body.username;
     var password = req.body.password;
     res.json({
-      username,
-      password
+      username: username,
+      password: password
     });
   }
 }
