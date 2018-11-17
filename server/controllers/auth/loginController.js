@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 module.exports = {
   login(req, res) {
-
+    res.send('get login route');
   },
 
   signJWT(req, res) {

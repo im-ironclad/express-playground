@@ -7,6 +7,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const passport = require('passport');
+const https = require('https');
 const path = require('path');
 const fs = require('fs');
 
@@ -43,6 +44,10 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(port, function () {
-  console.log(`Server listening on port ${port}`)
-});
+https.createServer({
+  key: fs.readFileSync('server.key'),
+  cert: fs.readFileSync('server.cert')
+}, app)
+.listen(port, function () {
+  console.log(`Example app listening on port ${port}`)
+})

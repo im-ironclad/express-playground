@@ -8,5 +8,6 @@ module.exports = (router, passport) => {
    * Auth routes to start
    */
   // Login
+  router.get('/login', (req, res) => res.send('login GET route'));
   router.post('/login', loginController.signJWT);
 }

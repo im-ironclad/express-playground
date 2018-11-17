@@ -52,7 +52,9 @@ module.exports = {
     https: true,
     port: 3000,
     proxy: {
-      "api": "https://localhost:5000"
+      "api/*": {
+        target: "http://localhost:5000"
+      }
     }
   }
 }
