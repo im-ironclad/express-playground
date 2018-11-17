@@ -26,8 +26,6 @@ require('./config/passport')(passport);
 
 // Call our routes and pass along the router and passport
 require('./routes')(router, passport);
-// Set prefix of / for development
-app.use('/', router);
 
 // If we are in production serve static build and assets
 if (process.env.NODE_ENV === 'production') {
@@ -40,6 +38,9 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client', 'public', 'index.html'));
   });
+} else {
+  // Set prefix of / for development
+  app.use('/', router);
 }
 
 app.listen(port, function () {
