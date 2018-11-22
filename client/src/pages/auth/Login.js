@@ -56,7 +56,7 @@ export default class Login extends Component {
       email_address: this.state.formValues.email_address,
       password: this.state.formValues.password
     }
-    axios.post('/api/login', data)
+    axios.post('api/login', data)
       .then(response => console.log(response.data))
       .catch(err => console.log(err));
   }

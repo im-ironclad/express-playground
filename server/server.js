@@ -26,23 +26,18 @@ require('./config/passport')(passport);
 
 // Call our routes and pass along the router and passport
 require('./routes')(router, passport);
+app.use('/api', router);
 
 // If we are in production serve static build and assets
 if (process.env.NODE_ENV === 'production') {
-  // Set prefix of /api for production
-  app.use('/api', router);
-  // Set static folder
+  // Set static folder to serve
   app.use(express.static(path.resolve(__dirname, '../client', 'public')));
-
   // Catchall similar to using historyApiFallback in dev
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client', 'public', 'index.html'));
   });
-} else {
-  // Set prefix of / for development
-  app.use('/', router);
+  app.listen(port);
+} // Otherwise we are in development
+else {
+  app.listen(port, () => console.log(`Listening on port ${port}`));
 }
-
-app.listen(port, function () {
-  console.log(`Server listening on port ${port}`)
-})

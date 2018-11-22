@@ -4,6 +4,16 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
+  devServer: {
+    contentBase: path.join(__dirname, "public"),
+    historyApiFallback: true,
+    port: 3000,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5000'
+      }
+    }
+  },
   entry: {
     app: path.resolve(__dirname, "src/App.js")
   },
@@ -44,17 +54,5 @@ module.exports = {
       }),
       new OptimizeCSSAssetsPlugin({})
     ]
-  },
-  devServer: {
-    contentBase: path.join(__dirname, "public"),
-    historyApiFallback: true,
-    compress: true,
-    https: true,
-    port: 3000,
-    proxy: {
-      "api/*": {
-        target: "http://localhost:5000"
-      }
-    }
   }
 }
