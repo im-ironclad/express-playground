@@ -1,5 +1,6 @@
 // const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 // TODO: Include bcrypt to hash and then cross-check passwords
 
@@ -7,6 +8,7 @@ module.exports = {
   signJWT(req, res) {
     let errors = {};
     let email = req.body.email_address;
+    let password = req.body.password;
 
     User.findOne({ email })
       .then(user => {

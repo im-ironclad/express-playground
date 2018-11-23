@@ -17,6 +17,7 @@ mongoose.connect(process.env.DB_CONNECTSTRING, { useNewUrlParser: true })
   .then(() => console.log('Connected to DB'))
   .catch(err => console.log(err));
 
+// Use bodyParser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -37,7 +38,7 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, '../client', 'public', 'index.html'));
   });
   app.listen(port);
-} // Otherwise we are in development
+} // Else we are in development and simply need to listen
 else {
   app.listen(port, () => console.log(`Listening on port ${port}`));
 }

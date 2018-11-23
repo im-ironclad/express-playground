@@ -1,0 +1,36 @@
+.header {
+
+  & .auth-nav,
+  & .nav {
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+
+    &__list {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;      
+      width: 100%;
+      max-width: $width-sm;
+      margin-right: auto;
+      margin-left: auto;
+      text-align: right;
+
+      &__link {
+        margin-right: $spacing-md;
+      }
+    }
+  }
+  
+  & .auth-nav {
+    height: 50px;
+    color: $color-white;
+    background-color: $color-orange;
+  }
+
+  & .nav {
+    height: 100px;
+    color: $color-offwhite;
+    background-color: $color-grey-dark;
+  }
+}

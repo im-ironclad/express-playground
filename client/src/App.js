@@ -8,9 +8,10 @@ import './styles/app.scss';
 // Import pages
 import Home from './pages/Home';
 import Login from './pages/auth/Login';
+import Register from './pages/auth/Register';
 
 // Import components
-import Navbar from './components/layout/Navbar';
+import Header from './components/layout/Header';
 
 class App extends Component {
   constructor(props) {
@@ -23,9 +24,10 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="app-cont">
-          <Navbar />
+          <Header />
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
         </div>
       </BrowserRouter>
     )

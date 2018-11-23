@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 
 // Import components
-import LoginForm from '../../components/forms/LoginForm';
+import Form from '../../components/forms/Form';
 
 export default class Login extends Component {
   constructor(props) {
@@ -12,7 +12,8 @@ export default class Login extends Component {
       formValues: {
         email_address: '',
         password: ''
-      }
+      },
+      formErrors: {}
     }
     this.formGroups = [
       {
@@ -27,7 +28,7 @@ export default class Login extends Component {
       }
     ]
     this.formProps = {
-      formDescription: 'Use this form to login to our application',
+      formDescription: 'Log in to our application',
       submitText: 'Login'
     }
   }
@@ -49,9 +50,6 @@ export default class Login extends Component {
     // Do basic client validation before posting to api
     // If errors, load errors
     // If no errors then post to api
-    /**
-     * For testing lets hit some api endpoints and see what/if we get back
-     */
     let data = {
       email_address: this.state.formValues.email_address,
       password: this.state.formValues.password
@@ -64,7 +62,13 @@ export default class Login extends Component {
   render() {
     return (
       <section className="page__login">  
-        <LoginForm formGroups={this.formGroups} formValues={this.state.formValues} formProps={this.formProps} handleSubmit={this.onLoginFormSubmit} handleInputChange={this.handleFormInputChange} />
+        <Form
+          formGroups={this.formGroups}
+          formValues={this.state.formValues}
+          formProps={this.formProps}
+          handleSubmit={this.onLoginFormSubmit}
+          handleInputChange={this.handleFormInputChange}
+          errors={this.state.formErrors} />
       </section>
     )
   }

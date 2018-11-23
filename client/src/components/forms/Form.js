@@ -10,8 +10,7 @@ export default class Form extends Component {
     super(props);
 
     this.state = {
-      resultMessage: null,
-      errors: {}
+      resultMessage: null
     }
   }
 
@@ -32,7 +31,7 @@ export default class Form extends Component {
                 groupLabelText={group.groupLabelText}
                 value={this.props.formValues[group.groupName]}
                 handleInputChange={this.props.handleInputChange}
-                errors={this.state.errors} />
+                errors={this.props.errors} />
             )
           }
 
