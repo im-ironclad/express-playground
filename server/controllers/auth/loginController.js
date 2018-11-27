@@ -31,7 +31,7 @@ module.exports = {
         // User found and shit got hit
         // Cross check password using bcrypt
         bcrypt.compare(req.body.password, user.password)
-          .then(isMatch => {
+          .then(isMatch => { // returns true or false
             if (!isMatch) return res.send('Passwords are NOT a match');
             // Passwords match, sign JWT token
             const payload = {

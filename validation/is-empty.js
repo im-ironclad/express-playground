@@ -3,10 +3,12 @@
  * Check all possible empty values including objects and strings
  **/
 var isEmpty = function(value) {
-  return value === undefined ||
+  return (
+    value === undefined ||
     value === null ||
     (typeof value === 'object' && Object.keys(value).length === 0) ||
-    (typeof value === 'string' && value.trim().length === 0);
+    (typeof value === 'string' && value.trim().length === 0)
+  );
 }
 
 module.exports = isEmpty;
