@@ -61,7 +61,14 @@ export default class Login extends Component {
 
     // If there weren't any errors, do yo thang
     axios.post('api/login', data)
-      .then(response => console.log(response.data))
+      .then(response => {
+        const { token } = response.data;
+        // Set token and add to localStorage
+        window.localStorage.setItem('jwtToken', token);
+        axios.defaults.headers.common['Authorization'] = token;
+        // Once done,redirect to user dashboard
+        return window.location.href = '/dashboard';
+      })
       .catch(err => this.setState({ formErrors: err.response.data }));
   }
 

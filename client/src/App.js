@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import reactDom from 'react-dom';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+// Import other needed things
+import PrivateRoute from './components/PrivateRoute';
 
 // Import app styles
 import './styles/app.scss';
@@ -9,6 +12,7 @@ import './styles/app.scss';
 import Home from './pages/Home';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import Dashboard from './pages/Dashboard';
 
 // Import components
 import Header from './components/layout/Header';
@@ -28,6 +32,13 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Switch>
+            <PrivateRoute
+              exact
+              path="/dashboard"
+              component={Dashboard}
+            />
+          </Switch>
         </div>
       </BrowserRouter>
     )

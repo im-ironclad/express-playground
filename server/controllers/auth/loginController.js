@@ -31,8 +31,25 @@ module.exports = {
         // User found and shit got hit
         // Cross check password using bcrypt
         bcrypt.compare(req.body.password, user.password)
-          .then(res => {
-            // res == true
+          .then(isMatch => {
+            if (!isMatch) return res.send('Passwords are NOT a match');
+            // Passwords match, sign JWT token
+            const payload = {
+              id: user.id,
+              name: user.name,
+            }
+
+            // Sign Auth Token
+            jwt.sign({
+              data: payload,
+              exp: Math.floor(Date.now() / 1000) + 3600 // an hour from now
+            }, 'secret',
+              (err, token) => {
+                if (err) res.status(400).json(err);
+                // return token so we can use on client
+                res.json({token: `Bearer${token}`});
+              }
+            );
           });
       })
       .catch(err => res.status(400).json(err.response.data));
@@ -81,10 +98,10 @@ module.exports = {
         // }
 
         // Sign Auth Token
-        // jwt.sign(
-        //   payload,
-        //   'secret',
-        //   { expiresIn: 3600 },
+        // jwt.sign({
+          // data: payload
+          // exp: Math.floor(Date.now() / 1000) + 3600
+        // }, 'secret',
         //   (err, token) => {
         //     if (err) res.status(422).send(err);
         //     res.json({token: `Bearer${token}`});

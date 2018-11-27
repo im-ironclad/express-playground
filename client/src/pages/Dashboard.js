@@ -3,9 +3,11 @@ import React, { Component } from 'react'
 export default class Dashboard extends Component {
   render() {
     return (
-      <h1>
-        Dashboard Page
-      </h1>
+      <section className="page__dashboard page-content">
+        <h1>
+          Dashboard Page
+        </h1>
+      </section>
     )
   }
 }
