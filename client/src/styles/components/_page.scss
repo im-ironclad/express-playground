@@ -1,0 +1,17 @@
+.page {
+
+  &-content {
+    width: $width-lg;
+    max-width: $max-width-lg;
+    margin-right: auto;
+    margin-left: auto;
+    padding-top: $spacing-md;
+  }
+
+  // Center the content on login and register pages
+  &__login,
+  &__register {
+    display: flex;
+    justify-content: center;
+  }
+}

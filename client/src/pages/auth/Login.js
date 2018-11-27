@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 
+// Import needed utilities
+import validateLoginInput from '../../../../validation/auth/login';
+
 // Import components
 import Form from '../../components/forms/Form';
 
@@ -13,7 +16,8 @@ export default class Login extends Component {
         email_address: '',
         password: ''
       },
-      formErrors: {}
+      formErrors: {},
+      formResult: {}
     }
     this.formGroups = [
       {
@@ -28,7 +32,6 @@ export default class Login extends Component {
       }
     ]
     this.formProps = {
-      formDescription: 'Log in to our application',
       submitText: 'Login'
     }
   }
@@ -47,25 +50,29 @@ export default class Login extends Component {
 
   onLoginFormSubmit = (e) => {
     e.preventDefault();
-    // Do basic client validation before posting to api
-    // If errors, load errors
-    // If no errors then post to api
-    let data = {
+    const data = {
       email_address: this.state.formValues.email_address,
       password: this.state.formValues.password
     }
+    // Validate the input fields
+    const { errors, isValid } = validateLoginInput(data);
+    // If errors, return set state with errors
+    if (!isValid) return this.setState({ formErrors: errors });
+
+    // If there weren't any errors, do yo thang
     axios.post('api/login', data)
       .then(response => console.log(response.data))
-      .catch(err => console.log(err));
+      .catch(err => this.setState({ formErrors: err.response.data }));
   }
 
   render() {
     return (
-      <section className="page__login">  
+      <section className="page__login page-content">  
         <Form
           formGroups={this.formGroups}
           formValues={this.state.formValues}
           formProps={this.formProps}
+          formResult={this.state.formResult}
           handleSubmit={this.onLoginFormSubmit}
           handleInputChange={this.handleFormInputChange}
           errors={this.state.formErrors} />

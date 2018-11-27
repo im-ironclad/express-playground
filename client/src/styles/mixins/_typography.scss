@@ -27,4 +27,9 @@
   @else if ($size=="body") {
     @include font-size-rem(1.6, 2.4);
   }
+  @else if ($size=="form-error") {
+    @include font-size-rem(1.3, 2.1);
+    font-weight: $font-bold;
+    color: $color-red-light;
+  }
 }

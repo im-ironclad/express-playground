@@ -5,43 +5,37 @@ import React, { Component } from 'react'
  */
 import FormGroup from './FormGroup';
 
-export default class Form extends Component {
-  constructor(props) {
-    super(props);
+export default function Form(props) {
+  const resultClassName = `form__result form--${props.formResult.status}`;
 
-    this.state = {
-      resultMessage: null
-    }
-  }
+  return (
+    <div className="form-cont">
+      { props.formResult.message && 
+        <p className={resultClassName}>
+          { props.formResult.message }
+        </p>
+      }
 
-  render() {
-    return (
-      <div className="form-cont">
-        <h3 className="form__description">
-          { this.props.formProps.formDescription }
-        </h3>
+      <form action="" className="form" onSubmit={props.handleSubmit}>
+        {
+          props.formGroups.map((group, i) => 
+            <FormGroup
+              key={i}
+              inputType={group.type}
+              groupName={group.groupName}
+              groupLabelText={group.groupLabelText}
+              value={props.formValues[group.groupName]}
+              handleInputChange={props.handleInputChange}
+              errors={props.errors} />
+          )
+        }
 
-        <form action="" className="form" onSubmit={this.props.handleSubmit}>
-          {
-            this.props.formGroups.map((group, i) => 
-              <FormGroup
-                key={i}
-                inputType={group.type}
-                groupName={group.groupName}
-                groupLabelText={group.groupLabelText}
-                value={this.props.formValues[group.groupName]}
-                handleInputChange={this.props.handleInputChange}
-                errors={this.props.errors} />
-            )
-          }
-
-          <div className="form__submit">
-            <button className="form__submit__btn">
-              { this.props.formProps.submitText }
-            </button>
-          </div>
-        </form>
-      </div>
-    )
-  }
+        <div className="form__submit">
+          <button className="form__submit__btn">
+            { props.formProps.submitText }
+          </button>
+        </div>
+      </form>
+    </div>
+  )
 }

@@ -25,6 +25,9 @@
     "https": "^1.0.0",
     "nodemon": "^1.18.6"
   },
+  "dependencies": {
+    "validator": "^10.9.0"
+  },
   "engines": {
     "node": "10.11.0"
   }

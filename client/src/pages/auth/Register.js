@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios';
 
+// Import needed utilities
+import validateRegisterInput from '../../../../validation/auth/register';
+
 // Import components
 import Form from '../../components/forms/Form';
 
@@ -15,7 +18,13 @@ export default class Register extends Component {
         password: '',
         password_confirm: ''
       },
-      formErrors: {}
+      formErrors: {},
+      formResult: {}
+    }
+
+    // Set non-state variables
+    this.formProps = {
+      submitText: 'Register'
     }
     this.formGroups = [
       {
@@ -39,13 +48,9 @@ export default class Register extends Component {
         groupLabelText: 'Confirm Password:',
       }
     ]
-    this.formProps = {
-      formDescription: 'Register a new account',
-      submitText: 'Register'
-    }
   }
 
-  // TODO: Abstract to utility function to use everywhere as needed
+  // TODO: Abstract to utility function to use everywhere as needed, if possible
   handleFormInputChange = (e) => {
     const groupName = e.target.name;
     const inputValue = e.target.value;
@@ -60,46 +65,64 @@ export default class Register extends Component {
 
   onRegisterFormSubmit = (e) => {
     e.preventDefault();
-    let errors = {};
-    // Client validation before posting to api, if errors set them in state
-    // TODO: Abstract validation to utility utilizing Validator NPM package
-    if (this.state.formValues.name === '') {
-      errors.name = "A name must be entered";
-    }
-    if (this.state.formValues.email_address === '') {
-      errors.email_address = "An email address must be entered";
-    }
-    if (this.state.formValues.password === '') {
-      errors.password = "A password must be entered";
-    }
-    if (this.state.formValues.password_confirm === '') {
-      errors.password_confirm = "You must confirm your password";
-    }
-    // If no errors then post to api
-    if (Object.keys(errors).length) {
-      return this.setState({
-        formErrors: errors
-      });
-    }
-
     let data = {
       name: this.state.formValues.name,
       email_address: this.state.formValues.email_address,
       password: this.state.formValues.password,
       password_confirm: this.state.formValues.password_confirm
     }
+
+    // Get our validationObject that holds our errors, if any
+    const { errors, isValid } = validateRegisterInput(data);
+
+    // If there are errors, return by setting them in the state
+    if (!isValid) {
+      return this.setState({
+        formErrors: errors
+      });
+    }
+
+    // If there weren't any errors, do yo thang
     axios.post('api/register', data)
-      .then(response => console.log(response.data))
-      .catch(err => console.log(err));
+      .then(response => {
+        console.log(response);
+        // Do something with the response
+        // Clear errors and give result of form submission
+        // TODO: Test cases against getting a response but no user being created
+
+
+
+        
+        // TODO: change from updating formResult etc to redirecting to the /home route on success
+        return this.setState({
+          formErrors: {},
+          formResult: {
+            status: 'success',
+            message: 'Form sent successfully.'
+          }
+        });
+      })
+      .catch(err => {
+        // TODO: Might need to verify that response comes with data, otherwise just so something with it
+        // Test cases against registerController User catch(es)
+
+        return this.setState({
+          formResult: {},
+          formErrors: {
+            ...err.response.data
+          }
+        });
+      });
   }
 
   render() {
     return (
-      <section className="page__register">  
+      <section className="page__register page-content">  
         <Form
           formGroups={this.formGroups}
           formValues={this.state.formValues}
           formProps={this.formProps}
+          formResult={this.state.formResult}
           handleSubmit={this.onRegisterFormSubmit}
           handleInputChange={this.handleFormInputChange}
           errors={this.state.formErrors} />
